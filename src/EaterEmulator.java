@@ -12,7 +12,7 @@ public class EaterEmulator extends JFrame implements ActionListener {
 	public static String versionString = "1.4";
 
 	// For easy testing
-	public boolean debug = false; // Basically just loads the ROM file below if true
+	public boolean debug = true; // Basically just loads the ROM file below if true
 	public static File loadedROM = new File("/home/jacob/Downloads/!a.out");
 
 	//Swing Things
