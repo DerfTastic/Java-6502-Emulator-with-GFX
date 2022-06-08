@@ -18,7 +18,7 @@ public class DisplayPanel extends JPanel implements ActionListener, KeyListener 
 		
 		t = new javax.swing.Timer(16, this);
 		t.start();
-		setBackground(Color.blue);
+		setBackground(Color.red);
 		setPreferredSize(new Dimension(1936, 966));
 		
 		romPageString = EaterEmulator.rom.ROMString.substring(romPage*960,(romPage+1)*960);
@@ -44,9 +44,19 @@ public class DisplayPanel extends JPanel implements ActionListener, KeyListener 
         //Title
         g.setFont(new Font("Calibri Bold", 50, 50));
         g.drawString("Ben Eater 6502 Emulator", 40, 50);
-        
-        //Version
-        g.setFont(new Font("Courier New Bold",20,20));
+
+		//Mod text
+		g.setFont(new Font("Comic Sans MS", 30, 30));
+		g.drawString("Graphics Mod by Jacob A.", 700, 55);
+
+		//Loaded ROM text
+		g.setFont(new Font("Calibri Bold", 50, 20));
+		g.drawString("Loaded ROM file:", 1300, 50);
+		g.drawString(EaterEmulator.getLoadedROM().toString(), 1300, 80);
+		g.drawRect(1295, 55, g.getFontMetrics().stringWidth(EaterEmulator.getLoadedROM().toString()) + 10, g.getFontMetrics().getHeight() + 10);
+
+		//Version
+		g.setFont(new Font("Courier New Bold",20,20));
         g.drawString("v"+EaterEmulator.versionString, 7, 1033);
         
         //Clocks

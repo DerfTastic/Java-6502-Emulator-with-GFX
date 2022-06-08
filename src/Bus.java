@@ -14,6 +14,9 @@ public class Bus {
 			System.err.println("Can't write to ROM! ("+Integer.toHexString(Short.toUnsignedInt(address)).toUpperCase()+")");
 		} else if (Short.toUnsignedInt(address) <= 24592 && Short.toUnsignedInt(address) >= 24576) {
 			EaterEmulator.via.write(address, data);
+		} else if (Short.toUnsignedInt(address) >= 8192 && Short.toUnsignedInt(address) <= 16383){
+			EaterEmulator.gfx.setCursor(Math.floorMod(Short.toUnsignedInt(address) - 8192, 256), Math.floorDiv(Short.toUnsignedInt(address) - 8192, 256));
+			EaterEmulator.ram.write(address, data);
 		} else {
 			EaterEmulator.ram.write(address, data);
 		}

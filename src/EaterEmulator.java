@@ -10,7 +10,11 @@ import javax.swing.*;
 public class EaterEmulator extends JFrame implements ActionListener {
 	public static EaterEmulator emu;
 	public static String versionString = "1.4";
-	
+
+	// For easy testing
+	public boolean debug = false; // Basically just loads the ROM file below if true
+	public static File loadedROM = new File("/home/jacob/Downloads/!a.out");
+
 	//Swing Things
 	JPanel p = new JPanel();
 	JPanel header = new JPanel();
@@ -24,17 +28,19 @@ public class EaterEmulator extends JFrame implements ActionListener {
 	public static int clocks = 0;
 	public static boolean haltFlag = true;
 	public static boolean slowerClock = false;
-	
+
 	//Emulator Things
 	public static RAM ram = new RAM();
 	public static ROM rom = new ROM();
 	public static LCD lcd = new LCD();
+	public static GFX gfx = new GFX();
 	public static VIA via = new VIA();
 	public static Bus bus = new Bus();
 	public static CPU cpu = new CPU();
 	
 	public DisplayPanel GraphicsPanel = new DisplayPanel();
-	
+
+
 	public EaterEmulator() {
 		//Swing Stuff:
 		System.setProperty("sun.java2d.opengl", "true");
@@ -71,7 +77,14 @@ public class EaterEmulator extends JFrame implements ActionListener {
 	        }
 	    });
 		clockThread.start();
-		
+
+		//Load initial ROM so you don't have to click open ROM every startup
+		if (debug) {
+			rom.setROMArray(ROMLoader.readROM(loadedROM));
+			GraphicsPanel.requestFocus();
+			GraphicsPanel.romPageString = EaterEmulator.rom.ROMString.substring(GraphicsPanel.romPage * 960, (GraphicsPanel.romPage + 1) * 960);
+		}
+
 		//Final Setup
 		GraphicsPanel.setVisible(true);
 		this.setTitle("6502 Emulator");
@@ -88,6 +101,7 @@ public class EaterEmulator extends JFrame implements ActionListener {
 
 	        if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            rom.setROMArray(ROMLoader.readROM(fc.getSelectedFile()));
+				this.loadedROM = fc.getSelectedFile();
 	        }
 	        GraphicsPanel.requestFocus();
 	        GraphicsPanel.romPageString = EaterEmulator.rom.ROMString.substring(GraphicsPanel.romPage*960,(GraphicsPanel.romPage+1)*960);
@@ -104,8 +118,19 @@ public class EaterEmulator extends JFrame implements ActionListener {
 			cpu.reset();
 		}
 	}
-	
+
+	public static File getLoadedROM() {
+		return loadedROM;
+	}
 	public static void main(String[] args) {
 		emu = new EaterEmulator();
+
+		if (args.length > 0) {
+			try {
+				loadedROM = new File(args[0]);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

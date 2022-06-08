@@ -1,5 +1,5 @@
 public class RAM {
-	private byte[] array;
+	public byte[] array;
 	public String RAMString = "";
 	
 	public RAM() {

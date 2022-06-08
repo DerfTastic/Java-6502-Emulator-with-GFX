@@ -19,7 +19,7 @@ public class LCD extends JFrame implements ActionListener {
 	
 	boolean graphicalCursorBlinkFlag = false;
 	
-	boolean debug = true;
+	boolean debug = false;
 	
 	//Internal flags
 	int cursorPos = 0;
@@ -33,6 +33,7 @@ public class LCD extends JFrame implements ActionListener {
 	
 	public LCD() {
 		this.setSize(565,185);
+		this.setLocation(400, 550);
 		t = new Timer(100,this);
 		t.start();
 		cursorTimer = new Timer(500,this);
@@ -58,7 +59,7 @@ public class LCD extends JFrame implements ActionListener {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		LCD lcd = new LCD();
-		
+
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		System.out.println("[RS] [data]");
@@ -131,10 +132,8 @@ public class LCD extends JFrame implements ActionListener {
 					cursorPos += (rightleft ? 1 : -1);
 					if (cursorPos < 0)
 						cursorPos = 0;
-					if (debug) {
+					if (debug)
 						System.out.println("Shifted cursor to the "+(rightleft ? "right." : "left."));
-						System.out.println("CursorPos: "+cursorPos);
-					}
 				}
 			} else if ((data & 0b00001000) == 0b00001000) {
 				//DISPLAY CONTROL
@@ -206,9 +205,9 @@ public class LCD extends JFrame implements ActionListener {
 		}
 		
 		public void paintComponent(Graphics g) {
-			g.setColor(Color.getHSBColor(0.62f, 0.83f, 1f));
+			g.setColor(Color.red);
 			g.fillRect(0, 0, p.getWidth(), p.getHeight());
-			g.setColor(Color.getHSBColor(0.62f, 0.87f, 0.78f));
+			g.setColor(new Color(128, 0, 0));
 			for (int i = 0; i<16; i++) {
 				for (int j = 0; j<2; j++) {
 					g.fillRect(12+33*i, 25+50*j, 30, 47);

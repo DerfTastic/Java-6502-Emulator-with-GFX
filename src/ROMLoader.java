@@ -4,9 +4,10 @@ import java.util.ArrayList;
 public class ROMLoader {
 	static ArrayList<Byte> ROM = new ArrayList<Byte>();
 	
-	//static File ROMfile = new File("C:/Users/Dylan/Documents/vasm workspace/out.bin");
+	static File ROMfile = new File("/home/jacob/Downloads/!a.out");
 	
 	public static byte[] readROM(File file) {
+
 		ROM = new ArrayList<Byte>();
 		
 		InputStream inputStream;
@@ -81,7 +82,7 @@ public class ROMLoader {
 		}
 		return String.valueOf(pads)+s;
 	}
-	
+
 //	public static void main(String[] args) {
 //		byte[] be = {(byte)255,(byte)0,(byte)16,(byte)128,(byte)11,(byte)32,(byte)255,(byte)0,(byte)16,(byte)128,(byte)11,(byte)32,(byte)255,(byte)0,(byte)16,(byte)128,(byte)11,(byte)32,(byte)255,(byte)0,(byte)16,(byte)128,(byte)11,(byte)32,(byte)255,(byte)0,(byte)16,(byte)128,(byte)11,(byte)32,(byte)255,(byte)0,(byte)16,(byte)128,(byte)11,(byte)32};
 //		System.out.println(ROMString(readROM(ROMfile),16,true));
