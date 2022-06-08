@@ -32,5 +32,5 @@ You can load ```.bin``` files into RAM or ROM using the File Pickers in the top 
 I (DerfTastic) have since added graphical capabilities to this emulator as shown in Ben's "World's Worst Video Card" series (https://www.youtube.com/watch?v=2iURr3NBprc). It works just like the ones in the video and spawns a separate window, like the LCD. It even shows the portion of the screen that is invisible to the monitor (horizontal blanking period) as well as a little "pixel cursor" (just a little white box around the pixel that was last written to) for extra debugging help! 
 
 ## Screenshots
-![Screenshot 1](screenshots/screenshot.png?raw=true)
+![Screenshot 1](screenshots/screenshot1.png?raw=true)
 ![Screenshot 2](screenshots/screenshot2.png?raw=true)
